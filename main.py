@@ -226,7 +226,7 @@ def main():
                         choices=["bci_iv_2a", "bci_iv_2b", "physionet"],
                         help="Dataset to use")
     parser.add_argument("--model", type=str, default="eegnet",
-                        choices=["eegnet", "shallowconvnet", "deepconvnet"],
+                        choices=["eegnet", "shallowconvnet", "deepconvnet", "eeginception"],
                         help="Model architecture")
     parser.add_argument("--strategy", type=str, default="fine_tune",
                         choices=["fine_tune", "feature_extract", "domain_adapt",
