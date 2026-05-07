@@ -15,12 +15,12 @@ import torch
 from datetime import datetime
 from typing import Dict, List
 
-from config import (
+from base_model_comparison.config import (
     PreprocessingConfig, DataConfig, ModelConfig, TransferConfig, TrainConfig,
 )
-from models import build_model
-from datasets import create_source_target_loaders, load_and_preprocess_subject
-from trainer import run_transfer_pipeline, pretrain_on_source, finetune_on_target
+from base_model_comparison.models import build_model
+from base_model_comparison.datasets import create_source_target_loaders, load_and_preprocess_subject
+from base_model_comparison.trainer import run_transfer_pipeline, pretrain_on_source, finetune_on_target
 
 
 def set_seed(seed: int):

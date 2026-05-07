@@ -21,7 +21,7 @@ from sklearn.metrics import (
 )
 from typing import Dict, Optional, Tuple, List
 
-from transfer_learning import (
+from base_model_comparison.transfer_learning import (
     DomainAdaptationModel, DANN, ProgressiveNet, MultiSourceTransfer,
 )
 
@@ -514,7 +514,7 @@ def run_transfer_pipeline(
     Returns:
         results: Dictionary with metrics and model
     """
-    from transfer_learning import TransferLearningManager
+    from base_model_comparison.transfer_learning import TransferLearningManager
 
     device = train_config.device
     strategy = transfer_config.strategy
@@ -542,7 +542,7 @@ def run_transfer_pipeline(
         )
 
     elif strategy == "domain_adapt":
-        from transfer_learning import DomainAdaptationModel
+        from base_model_comparison.transfer_learning import DomainAdaptationModel
         da_model = DomainAdaptationModel(pretrained_model, adaptation_type="mmd")
         final_model, metrics = train_domain_adaptation(
             da_model, source_loader, target_train_loader, target_test_loader,
@@ -550,14 +550,14 @@ def run_transfer_pipeline(
         )
 
     elif strategy == "dann":
-        from transfer_learning import DANN
+        from base_model_comparison.transfer_learning import DANN
         dann_model = DANN(pretrained_model, n_classes)
         final_model, metrics = train_dann(
             dann_model, source_loader, target_train_loader, target_test_loader, train_config,
         )
 
     elif strategy == "progressive":
-        from transfer_learning import ProgressiveNet
+        from base_model_comparison.transfer_learning import ProgressiveNet
         prog_model = ProgressiveNet(pretrained_model, n_classes)
         final_model, metrics = finetune_on_target(
             prog_model, target_train_loader, target_test_loader,
@@ -567,7 +567,7 @@ def run_transfer_pipeline(
     elif strategy == "multi_source":
         if source_models is None:
             raise ValueError("multi_source strategy requires source_models list")
-        from transfer_learning import MultiSourceTransfer
+        from base_model_comparison.transfer_learning import MultiSourceTransfer
         ms_model = MultiSourceTransfer(source_models, n_classes)
         final_model, metrics = finetune_on_target(
             ms_model, target_train_loader, target_test_loader,

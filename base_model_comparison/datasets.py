@@ -13,7 +13,7 @@ from torch.utils.data import Dataset, DataLoader, Subset, ConcatDataset
 from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 
-from preprocessing import EEGPreprocessor, euclidean_alignment
+from base_model_comparison.preprocessing import EEGPreprocessor, euclidean_alignment
 
 
 # ──────────────────────────────────────────────────────────────────────
